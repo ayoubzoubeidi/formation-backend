@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -25,6 +27,6 @@ public class UtilisateurDto {
 
     private String password;
 
-    private String role;
+    private List<RoleDto> roles = new ArrayList<>();
 
 }

@@ -24,7 +24,7 @@ public class SessionDto {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime lastModifiedDate;
 
-    private FormationDto formation;
+    private List<FormationDto> formation;
 
     private List<ParticipantDto> participants = new ArrayList<>();
 

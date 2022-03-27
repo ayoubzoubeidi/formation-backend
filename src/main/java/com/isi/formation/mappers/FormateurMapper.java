@@ -4,7 +4,7 @@ import com.isi.formation.domain.Formateur;
 import com.isi.formation.web.models.FormateurDto;
 import org.mapstruct.Mapper;
 
-@Mapper(uses = {DateMapper.class})
+@Mapper(uses = {DateMapper.class, SessionMapper.class, PaysMapper.class})
 public interface FormateurMapper {
 
     Formateur formateurDtoToFormateur(FormateurDto formateurDto);
