@@ -10,7 +10,7 @@ public interface SessionService {
 
     URI saveSession(SessionDto SessionDto);
 
-    void updateSession(SessionDto SessionDto);
+    void updateSession(SessionDto SessionDto, UUID id);
 
     List<SessionDto> getAllSession();
 

@@ -29,8 +29,8 @@ public class OrganismeServiceImpl implements OrganismeService {
     }
 
     @Override
-    public void updateOrganisme(OrganismeDto organismeDto) {
-        Organisme savedOrganisme = organismeRepository.findById(organismeDto.getId()).orElseThrow(RuntimeException::new);
+    public void updateOrganisme(OrganismeDto organismeDto, UUID id) {
+        Organisme savedOrganisme = organismeRepository.findById(id).orElseThrow(RuntimeException::new);
 
         savedOrganisme.setLibelle(organismeDto.getLibelle());
 

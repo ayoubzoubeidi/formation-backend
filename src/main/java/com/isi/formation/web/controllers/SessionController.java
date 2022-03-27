@@ -36,8 +36,8 @@ public class SessionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateSessionById(@RequestBody SessionDto SessionDto) {
-        SessionService.updateSession(SessionDto);
+    public ResponseEntity<?> updateSessionById(@RequestBody SessionDto SessionDto, @PathVariable UUID id) {
+        SessionService.updateSession(SessionDto, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

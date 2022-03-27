@@ -5,7 +5,6 @@ import com.isi.formation.domain.TypeParticipant;
 import com.isi.formation.mappers.ParticipantMapper;
 import com.isi.formation.repository.ParticipantRepository;
 import com.isi.formation.web.models.ParticipantDto;
-import com.isi.formation.web.models.ParticipantDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -31,8 +30,8 @@ public class ParticipantServiceImpl implements ParticipantService {
     }
 
     @Override
-    public void updateParticipant(ParticipantDto participantDto) {
-        Participant savedParticipant = participantRepository.findById(participantDto.getId()).orElseThrow(RuntimeException::new);
+    public void updateParticipant(ParticipantDto participantDto, UUID id) {
+        Participant savedParticipant = participantRepository.findById(id).orElseThrow(RuntimeException::new);
 
         savedParticipant.setTypeParticipant(TypeParticipant.valueOf(participantDto.getTypeParticipant()));
         savedParticipant.setEmail(participantDto.getEmail());

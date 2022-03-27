@@ -10,7 +10,7 @@ public interface FormateurService {
 
     URI saveFormateur(FormateurDto formationDto);
 
-    void updateFormateur(FormateurDto formationDto);
+    void updateFormateur(FormateurDto formationDto, UUID id);
 
     List<FormateurDto> getAllFormateur();
 

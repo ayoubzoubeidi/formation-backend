@@ -10,7 +10,7 @@ public interface UtilisateurService {
 
     URI saveUtilisateur(UtilisateurDto UtilisateurDto);
 
-    void updateUtilisateur(UtilisateurDto UtilisateurDto);
+    void updateUtilisateur(UtilisateurDto UtilisateurDto, UUID id);
 
     List<UtilisateurDto> getAllUtilisateur();
 

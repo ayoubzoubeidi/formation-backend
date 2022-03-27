@@ -1,7 +1,6 @@
 package com.isi.formation.services;
 
 import com.isi.formation.web.models.PaysDto;
-import com.isi.formation.web.models.PaysDto;
 
 import java.net.URI;
 import java.util.List;
@@ -11,7 +10,7 @@ public interface PaysService {
 
     URI savePays(PaysDto PaysDto);
 
-    void updatePays(PaysDto PaysDto);
+    void updatePays(PaysDto PaysDto, UUID id);
 
     List<PaysDto> getAllPays();
 

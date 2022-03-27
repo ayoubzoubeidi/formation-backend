@@ -35,8 +35,8 @@ public class FormationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateFormationById(@RequestBody FormationDto FormationDto) {
-        FormationService.updateFormation(FormationDto);
+    public ResponseEntity<?> updateFormationById(@RequestBody FormationDto FormationDto, @PathVariable UUID id) {
+        FormationService.updateFormation(FormationDto, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

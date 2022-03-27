@@ -29,8 +29,9 @@ public class DomaineServiceImpl implements DomaineService {
     }
 
     @Override
-    public void updateDomaine(DomaineDto domaineDto) {
-        Domaine savedDomaine = domaineRepository.findById(domaineDto.getId()).orElseThrow(RuntimeException::new);
+    public void updateDomaine(DomaineDto domaineDto, UUID id) {
+
+        Domaine savedDomaine = domaineRepository.findById(id).orElseThrow(RuntimeException::new);
 
         savedDomaine.setLibelle(domaineDto.getLibelle());
 

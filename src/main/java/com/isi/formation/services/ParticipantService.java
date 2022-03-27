@@ -10,7 +10,7 @@ public interface ParticipantService {
 
     URI saveParticipant(ParticipantDto ParticipantDto);
 
-    void updateParticipant(ParticipantDto ParticipantDto);
+    void updateParticipant(ParticipantDto ParticipantDto, UUID id);
 
     List<ParticipantDto> getAllParticipant();
 

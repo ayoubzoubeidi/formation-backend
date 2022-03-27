@@ -35,8 +35,8 @@ public class FormateurController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateFormateurById(@RequestBody FormateurDto FormateurDto) {
-        FormateurService.updateFormateur(FormateurDto);
+    public ResponseEntity<?> updateFormateurById(@RequestBody FormateurDto FormateurDto, @PathVariable UUID id) {
+        FormateurService.updateFormateur(FormateurDto, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

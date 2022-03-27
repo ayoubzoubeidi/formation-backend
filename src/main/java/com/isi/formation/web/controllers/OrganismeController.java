@@ -35,8 +35,8 @@ public class OrganismeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateOrganismeById(@RequestBody OrganismeDto OrganismeDto) {
-        OrganismeService.updateOrganisme(OrganismeDto);
+    public ResponseEntity<?> updateOrganismeById(@RequestBody OrganismeDto OrganismeDto, @PathVariable UUID id) {
+        OrganismeService.updateOrganisme(OrganismeDto, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

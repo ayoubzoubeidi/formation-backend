@@ -29,8 +29,8 @@ public class PaysServiceImpl implements PaysService {
     }
 
     @Override
-    public void updatePays(PaysDto paysDto) {
-        Pays savedPays = paysRepository.findById(paysDto.getId()).orElseThrow(RuntimeException::new);
+    public void updatePays(PaysDto paysDto, UUID id) {
+        Pays savedPays = paysRepository.findById(id).orElseThrow(RuntimeException::new);
 
         savedPays.setNom(paysDto.getNom());
 

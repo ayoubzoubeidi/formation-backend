@@ -10,7 +10,7 @@ public interface OrganismeService {
 
     URI saveOrganisme(OrganismeDto OrganismeDto);
 
-    void updateOrganisme(OrganismeDto OrganismeDto);
+    void updateOrganisme(OrganismeDto OrganismeDto, UUID id);
 
     List<OrganismeDto> getAllOrganisme();
 

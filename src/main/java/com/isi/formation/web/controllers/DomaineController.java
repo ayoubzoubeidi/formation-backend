@@ -35,8 +35,8 @@ public class DomaineController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateDomaineById(@RequestBody DomaineDto domaineDto) {
-        domaineService.updateDomaine(domaineDto);
+    public ResponseEntity<?> updateDomaineById(@RequestBody DomaineDto domaineDto, @PathVariable UUID id) {
+        domaineService.updateDomaine(domaineDto, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

@@ -35,8 +35,8 @@ public class ParticipantController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateParticipantById(@RequestBody ParticipantDto ParticipantDto) {
-        ParticipantService.updateParticipant(ParticipantDto);
+    public ResponseEntity<?> updateParticipantById(@RequestBody ParticipantDto ParticipantDto, @PathVariable UUID id) {
+        ParticipantService.updateParticipant(ParticipantDto, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

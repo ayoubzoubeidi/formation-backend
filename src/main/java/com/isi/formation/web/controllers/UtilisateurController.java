@@ -35,8 +35,8 @@ public class UtilisateurController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUtilisateurById(@RequestBody UtilisateurDto UtilisateurDto) {
-        UtilisateurService.updateUtilisateur(UtilisateurDto);
+    public ResponseEntity<?> updateUtilisateurById(@RequestBody UtilisateurDto UtilisateurDto, @PathVariable UUID id) {
+        UtilisateurService.updateUtilisateur(UtilisateurDto, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

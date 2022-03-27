@@ -5,8 +5,6 @@ import com.isi.formation.domain.TypeFormateur;
 import com.isi.formation.mappers.FormateurMapper;
 import com.isi.formation.repository.FormateurRepository;
 import com.isi.formation.web.models.FormateurDto;
-import com.isi.formation.web.models.FormateurDto;
-import com.isi.formation.web.models.FormationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,8 +32,9 @@ public class FormateurServiceImpl implements FormateurService {
     }
 
     @Override
-    public void updateFormateur(FormateurDto formateurDto) {
-        Formateur savedFormateur = formateurRepository.findById(formateurDto.getId()).orElseThrow(RuntimeException::new);
+    public void updateFormateur(FormateurDto formateurDto, UUID id) {
+
+        Formateur savedFormateur = formateurRepository.findById(id).orElseThrow(RuntimeException::new);
 
         savedFormateur.setTypeFormateur(TypeFormateur.valueOf(formateurDto.getTypeFormateur()));
         savedFormateur.setEmail(formateurDto.getEmail());

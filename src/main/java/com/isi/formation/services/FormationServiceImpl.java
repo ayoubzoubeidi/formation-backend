@@ -4,7 +4,6 @@ import com.isi.formation.domain.Formation;
 import com.isi.formation.mappers.FormationMapper;
 import com.isi.formation.repository.FormationRepository;
 import com.isi.formation.web.models.FormationDto;
-import com.isi.formation.web.models.FormationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -31,8 +30,8 @@ public class FormationServiceImpl implements FormationService {
     }
 
     @Override
-    public void updateFormation(FormationDto formationDto) {
-        Formation savedFormation = formationRepository.findById(formationDto.getId()).orElseThrow(RuntimeException::new);
+    public void updateFormation(FormationDto formationDto, UUID id) {
+        Formation savedFormation = formationRepository.findById(id).orElseThrow(RuntimeException::new);
 
         savedFormation.setDuree(formationDto.getDuree());
         savedFormation.setBudget(formationDto.getBudget());

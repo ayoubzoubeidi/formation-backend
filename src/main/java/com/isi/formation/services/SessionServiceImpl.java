@@ -4,7 +4,6 @@ import com.isi.formation.domain.Session;
 import com.isi.formation.mappers.SessionMapper;
 import com.isi.formation.repository.SessionRepository;
 import com.isi.formation.web.models.SessionDto;
-import com.isi.formation.web.models.SessionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -30,8 +29,8 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public void updateSession(SessionDto sessionDto) {
-        Session savedSession = sessionRepository.findById(sessionDto.getId()).orElseThrow(RuntimeException::new);
+    public void updateSession(SessionDto sessionDto, UUID id) {
+        Session savedSession = sessionRepository.findById(id).orElseThrow(RuntimeException::new);
 
         savedSession.setDateDebut(sessionDto.getDateDebut());
         savedSession.setDateFin(sessionDto.getDateFin());

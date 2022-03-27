@@ -10,7 +10,7 @@ public interface DomaineService {
 
     URI saveDomaine(DomaineDto domaineDto);
 
-    void updateDomaine(DomaineDto domaineDto);
+    void updateDomaine(DomaineDto domaineDto, UUID id);
 
     List<DomaineDto> getAllDomaine();
 

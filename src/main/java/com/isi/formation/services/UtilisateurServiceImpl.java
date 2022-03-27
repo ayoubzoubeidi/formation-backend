@@ -4,7 +4,6 @@ import com.isi.formation.domain.Utilisateur;
 import com.isi.formation.mappers.UtilisateurMapper;
 import com.isi.formation.repository.UtilisateurRepository;
 import com.isi.formation.web.models.UtilisateurDto;
-import com.isi.formation.web.models.UtilisateurDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -30,8 +29,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public void updateUtilisateur(UtilisateurDto utilisateurDto) {
-        Utilisateur savedUtilisateur = utilisateurRepository.findById(utilisateurDto.getId()).orElseThrow(RuntimeException::new);
+    public void updateUtilisateur(UtilisateurDto utilisateurDto, UUID id) {
+        Utilisateur savedUtilisateur = utilisateurRepository.findById(id).orElseThrow(RuntimeException::new);
 
         savedUtilisateur.setLogin(utilisateurDto.getLogin());
         savedUtilisateur.setPassword(utilisateurDto.getPassword());

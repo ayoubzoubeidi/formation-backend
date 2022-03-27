@@ -35,8 +35,8 @@ public class PaysController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePaysById(@RequestBody PaysDto PaysDto) {
-        PaysService.updatePays(PaysDto);
+    public ResponseEntity<?> updatePaysById(@RequestBody PaysDto PaysDto, @PathVariable UUID id) {
+        PaysService.updatePays(PaysDto, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
