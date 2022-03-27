@@ -24,8 +24,14 @@ public class Session extends BaseEntity {
     private Date dateFin;
 
     @ManyToOne
-    @JoinColumn(name = "formation_id")
-    private Formation formation;
+    @JoinColumn(name = "formateur_id")
+    private Formateur formateur;
+
+    @ManyToMany
+    @JoinTable(name = "formation_session",
+            joinColumns = {@JoinColumn(name = "session_id")},
+            inverseJoinColumns = {@JoinColumn(name = "formation_id")})
+    private Set<Formation> formations = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "participation",

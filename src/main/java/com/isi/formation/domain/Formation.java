@@ -19,11 +19,7 @@ public class Formation extends BaseEntity {
 
     private String typeFormation;
 
-    @ManyToOne
-    @JoinColumn(name = "formateur_id")
-    private Formateur formateur;
-
-    @OneToMany(mappedBy = "formation")
+    @ManyToMany(mappedBy = "formations")
     private Set<Session> sessions = new HashSet<>();
 
     private Integer duree;
