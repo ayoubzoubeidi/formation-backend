@@ -27,8 +27,8 @@ public class Session extends BaseEntity {
     @JoinColumn(name = "formateur_id")
     private Formateur formateur;
 
-    @OneToMany(mapedby="session")
-    private Formation formations;
+    @OneToMany(mappedBy = "session")
+    private Set<Formation> formations = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "participation",

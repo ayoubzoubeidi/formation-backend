@@ -2,10 +2,10 @@ package com.isi.formation.domain;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -19,8 +19,9 @@ public class Formation extends BaseEntity {
 
     private String typeFormation;
 
-    @ManyToMany(mappedBy = "formations")
-    private Set<Session> sessions = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "session_id")
+    private Session session;
 
     private Integer duree;
 
