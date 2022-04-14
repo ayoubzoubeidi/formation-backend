@@ -5,7 +5,9 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,9 +21,8 @@ public class Formation extends BaseEntity {
 
     private String typeFormation;
 
-    @ManyToOne
-    @JoinColumn(name = "session_id")
-    private Session session;
+    @OneToMany(mappedBy = "formations")
+    private Set<Session> session;
 
     private Integer duree;
 
