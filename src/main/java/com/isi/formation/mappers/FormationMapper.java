@@ -4,7 +4,7 @@ import com.isi.formation.domain.Formation;
 import com.isi.formation.web.models.FormationDto;
 import org.mapstruct.Mapper;
 
-@Mapper(uses = {DateMapper.class, FormationMapper.class, ParticipantMapper.class})
+@Mapper(uses = {DateMapper.class, SessionMapper.class, ParticipantMapper.class})
 public interface FormationMapper {
 
     Formation formationDtoToFormation(FormationDto formationDto);

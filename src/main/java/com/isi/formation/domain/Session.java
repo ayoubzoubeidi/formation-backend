@@ -29,7 +29,7 @@ public class Session extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "formation_id")
-    private Formation formations;
+    private Formation formation;
 
     @ManyToMany
     @JoinTable(name = "participation",

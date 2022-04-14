@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -22,7 +23,7 @@ public class Formation extends BaseEntity {
     private String typeFormation;
 
     @OneToMany(mappedBy = "formations")
-    private Set<Session> session;
+    private Set<Session> sessions = new HashSet<>();
 
     private Integer duree;
 
