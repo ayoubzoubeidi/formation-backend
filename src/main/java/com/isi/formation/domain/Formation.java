@@ -22,7 +22,7 @@ public class Formation extends BaseEntity {
 
     private String typeFormation;
 
-    @OneToMany(mappedBy = "formations")
+    @OneToMany(mappedBy = "formation")
     private Set<Session> sessions = new HashSet<>();
 
     private Integer duree;
