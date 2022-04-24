@@ -4,7 +4,7 @@ import com.isi.formation.domain.Pays;
 import com.isi.formation.web.models.PaysDto;
 import org.mapstruct.Mapper;
 
-@Mapper(uses = {DateMapper.class})
+@Mapper
 public interface PaysMapper {
 
     Pays paysDtoToPays(PaysDto paysDto);

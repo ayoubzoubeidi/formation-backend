@@ -1,11 +1,14 @@
 package com.isi.formation.services;
 
 import com.isi.formation.domain.Session;
+import com.isi.formation.mappers.ParticipantMapper;
 import com.isi.formation.mappers.SessionMapper;
 import com.isi.formation.repository.SessionRepository;
+import com.isi.formation.web.models.ParticipantDto;
 import com.isi.formation.web.models.SessionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -15,10 +18,12 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class SessionServiceImpl implements SessionService {
 
     private final SessionRepository sessionRepository;
     private final SessionMapper sessionMapper;
+    private final ParticipantMapper participantMapper;
 
     @Override
     public URI saveSession(SessionDto sessionDto) {
@@ -48,6 +53,22 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
+    public List<ParticipantDto> getParticipationBySessionId(UUID sessionId) {
+        return sessionRepository.findParticipantInSession(sessionId)
+                .stream()
+                .map(participantMapper::participantToParticipantDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ParticipantDto> getParticipationNotInSession(UUID sessionId) {
+        return sessionRepository.findParticipantNotInSession(sessionId)
+                .stream()
+                .map(participantMapper::participantToParticipantDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public SessionDto getSessionById(UUID sessionId) {
         Session savedSession = sessionRepository.findById(sessionId).orElseThrow(RuntimeException::new);
         return sessionMapper.sessionToSessionDto(savedSession);
@@ -56,5 +77,15 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public void deleteSessionById(UUID sessionId) {
         sessionRepository.deleteById(sessionId);
+    }
+
+    @Override
+    public void subscribeToSession(UUID sessionsId, UUID participantId) {
+        sessionRepository.addParticipation(sessionsId, participantId);
+    }
+
+    @Override
+    public void unsubscribeToSession(UUID sessionsId, UUID participantId) {
+        sessionRepository.removeParticipation(sessionsId, participantId);
     }
 }

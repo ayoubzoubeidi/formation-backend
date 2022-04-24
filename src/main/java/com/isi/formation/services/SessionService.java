@@ -1,5 +1,6 @@
 package com.isi.formation.services;
 
+import com.isi.formation.web.models.ParticipantDto;
 import com.isi.formation.web.models.SessionDto;
 
 import java.net.URI;
@@ -14,7 +15,15 @@ public interface SessionService {
 
     List<SessionDto> getAllSession();
 
+    List<ParticipantDto> getParticipationBySessionId(UUID sessionId);
+
+    List<ParticipantDto> getParticipationNotInSession(UUID sessionId);
+
     SessionDto getSessionById(UUID SessionId);
 
     void deleteSessionById(UUID SessionId);
+
+    void subscribeToSession(UUID sessionsId, UUID participantId);
+
+    void unsubscribeToSession(UUID sessionsId, UUID participantId);
 }

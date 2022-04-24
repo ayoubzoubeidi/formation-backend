@@ -5,9 +5,11 @@ import com.isi.formation.web.models.DomaineDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.UUID;
 
 import static com.isi.formation.web.controllers.ApiUrls.DOMAINE_MAIN_URL;
@@ -19,11 +21,13 @@ public class DomaineController {
 
     private final DomaineService domaineService;
 
+    @PreAuthorize("hasAuthority('read.all')")
     @GetMapping
     public ResponseEntity<?> getAllDomaine() {
         return new ResponseEntity<>(domaineService.getAllDomaine(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('read.all')")
     @PostMapping
     public ResponseEntity<?> saveDomaine(@RequestBody DomaineDto domaineDto) {
         return ResponseEntity.created(domaineService.saveDomaine(domaineDto)).build();

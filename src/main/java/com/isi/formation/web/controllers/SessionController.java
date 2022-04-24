@@ -18,32 +18,54 @@ import static com.isi.formation.web.controllers.ApiUrls.SESSION_MAIN_URL;
 @RequiredArgsConstructor
 public class SessionController {
 
-    private final SessionService SessionService;
+    private final SessionService sessionService;
 
     @GetMapping
     public ResponseEntity<?> getAllSession() {
-        return new ResponseEntity<>(SessionService.getAllSession(), HttpStatus.OK);
+        return new ResponseEntity<>(sessionService.getAllSession(), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<?> saveSession(@RequestBody SessionDto SessionDto) {
-        return ResponseEntity.created(SessionService.saveSession(SessionDto)).build();
+        return ResponseEntity.created(sessionService.saveSession(SessionDto)).build();
+    }
+
+    @GetMapping("/{sessionsId}/participants")
+    public ResponseEntity<?> getParticipation(@PathVariable UUID sessionsId) {
+        return new ResponseEntity<>(sessionService.getParticipationBySessionId(sessionsId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{sessionsId}/not-participants")
+    public ResponseEntity<?> getNotParticipants(@PathVariable UUID sessionsId) {
+        return new ResponseEntity<>(sessionService.getParticipationNotInSession(sessionsId), HttpStatus.OK);
+    }
+
+    @PostMapping("/{sessionsId}/subscribe/{participantId}")
+    public ResponseEntity<?> subscribeSession(@PathVariable UUID sessionsId, @PathVariable UUID participantId) {
+        sessionService.subscribeToSession(sessionsId, participantId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{sessionsId}/unsubscribe/{participantId}")
+    public ResponseEntity<?> unsubscribeSession(@PathVariable UUID sessionsId, @PathVariable UUID participantId) {
+        sessionService.unsubscribeToSession(sessionsId, participantId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getSessionById(@PathVariable UUID id) {
-        return new ResponseEntity<>(SessionService.getSessionById(id), HttpStatus.OK);
+        return new ResponseEntity<>(sessionService.getSessionById(id), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateSessionById(@RequestBody SessionDto SessionDto, @PathVariable UUID id) {
-        SessionService.updateSession(SessionDto, id);
+        sessionService.updateSession(SessionDto, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteSessionById(@PathVariable UUID id) {
-        SessionService.deleteSessionById(id);
+        sessionService.deleteSessionById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     

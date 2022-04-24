@@ -24,12 +24,16 @@ public class SessionDto {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime lastModifiedDate;
 
-    private FormationDto formation;
+    private String formation;
+
+    private FormateurDto formateur;
 
     private List<ParticipantDto> participants = new ArrayList<>();
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date dateDebut;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date dateFin;
 
 }

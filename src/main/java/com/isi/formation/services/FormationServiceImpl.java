@@ -2,8 +2,10 @@ package com.isi.formation.services;
 
 import com.isi.formation.domain.Formation;
 import com.isi.formation.mappers.FormationMapper;
+import com.isi.formation.mappers.SessionMapper;
 import com.isi.formation.repository.FormationRepository;
 import com.isi.formation.web.models.FormationDto;
+import com.isi.formation.web.models.SessionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -20,6 +22,7 @@ public class FormationServiceImpl implements FormationService {
 
     private final FormationRepository formationRepository;
     private final FormationMapper formationMapper;
+    private final SessionMapper sessionMapper;
 
     @Override
     public URI saveFormation(FormationDto formationDto) {
@@ -46,6 +49,14 @@ public class FormationServiceImpl implements FormationService {
         return formationRepository.findAll()
                 .stream()
                 .map(formationMapper::formationToFormationDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SessionDto> getAllSessionsByFormation(UUID formationId) {
+        return formationRepository.findAllSessionsByFormationId(formationId)
+                .stream()
+                .map(sessionMapper::sessionToSessionDto)
                 .collect(Collectors.toList());
     }
 

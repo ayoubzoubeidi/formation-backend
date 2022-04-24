@@ -2,10 +2,7 @@ package com.isi.formation.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,12 +19,13 @@ public class Formation extends BaseEntity {
 
     private String typeFormation;
 
-    @OneToMany(mappedBy = "formation")
+    @OneToMany(mappedBy = "formation", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    @Singular
     private Set<Session> sessions = new HashSet<>();
 
     private Integer duree;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
     @JoinColumn(name = "domaine_id")
     private Domaine domaine;
 

@@ -24,6 +24,11 @@ public class FormationController {
         return new ResponseEntity<>(FormationService.getAllFormation(), HttpStatus.OK);
     }
 
+    @GetMapping("/{formationId}/sessions")
+    public ResponseEntity<?> getAllSessionsForFormation(@PathVariable UUID formationId) {
+        return new ResponseEntity<>(FormationService.getAllSessionsByFormation(formationId), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> saveFormation(@RequestBody FormationDto FormationDto) {
         return ResponseEntity.created(FormationService.saveFormation(FormationDto)).build();

@@ -15,12 +15,6 @@ public class PaysDto {
 
     private UUID id;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
-    private OffsetDateTime createdDate;
-
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
-    private OffsetDateTime lastModifiedDate;
-
     private String nom;
 
 }

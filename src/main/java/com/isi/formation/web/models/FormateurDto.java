@@ -17,12 +17,6 @@ public class FormateurDto {
 
     private UUID id;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
-    private OffsetDateTime createdDate;
-
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
-    private OffsetDateTime lastModifiedDate;
-
     private String nom;
 
     private String prenom;
@@ -32,8 +26,6 @@ public class FormateurDto {
     private String tel;
 
     private OrganismeDto organisme;
-
-    private List<SessionDto> sessions = new ArrayList<>();
 
     private String typeFormateur;
 

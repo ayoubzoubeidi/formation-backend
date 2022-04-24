@@ -13,6 +13,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
+
+@NamedEntityGraph(name = "Sessions.all",
+        attributeNodes = {@NamedAttributeNode("organisme"), @NamedAttributeNode("formation"),
+                @NamedAttributeNode("formateur"), @NamedAttributeNode("participants")}
+)
 public class Session extends BaseEntity {
 
     @ManyToOne
@@ -23,15 +28,15 @@ public class Session extends BaseEntity {
 
     private Date dateFin;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
     @JoinColumn(name = "formateur_id")
     private Formateur formateur;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "formation_id")
     private Formation formation;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "participation",
             joinColumns = {@JoinColumn(name = "session_id")},
             inverseJoinColumns = {@JoinColumn(name = "participant_id")})

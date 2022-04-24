@@ -2,10 +2,7 @@ package com.isi.formation.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +11,17 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+@NamedEntityGraph(name = "Participants.all",
+        attributeNodes = {@NamedAttributeNode("organisme"),
+                @NamedAttributeNode(value = "sessions", subgraph = "sessions-sub")}, subgraphs = {
+        @NamedSubgraph(
+                name = "sessions-sub", attributeNodes = {@NamedAttributeNode("organisme"), @NamedAttributeNode("formation"),
+                @NamedAttributeNode("formateur")}
+        )
+}
+)
+
 @Entity
 public class Participant extends BaseEntity{
 
@@ -27,7 +35,8 @@ public class Participant extends BaseEntity{
     @JoinColumn(name = "organisme_id")
     private Organisme organisme;
 
-    @ManyToMany(mappedBy = "participants")
+    @ManyToMany(mappedBy = "participants", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @Singular
     private Set<Session> sessions = new HashSet<>();
 
     @ManyToOne
