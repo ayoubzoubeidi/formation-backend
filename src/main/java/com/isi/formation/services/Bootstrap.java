@@ -4,27 +4,31 @@ import com.isi.formation.domain.*;
 import com.isi.formation.repository.FormationRepository;
 import com.isi.formation.repository.ParticipantRepository;
 import com.isi.formation.repository.SessionRepository;
+import com.isi.formation.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Date;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 public class Bootstrap implements CommandLineRunner {
 
     private final FormationRepository formationRepository;
     private final SessionRepository sessionRepository;
     private final ParticipantRepository participantRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-      /*  formationRepository.deleteAll();
-        formationRepository.saveAndFlush(
+
+       /* formationRepository.saveAndFlush(
                 Formation.builder()
                         .titre("JavaScript")
                         .session(Session.builder().dateDebut(new Date()).dateFin(new Date(2023, Calendar.FEBRUARY, 15))
@@ -50,16 +54,17 @@ public class Bootstrap implements CommandLineRunner {
                         .domaine(Domaine.builder().libelle("NJARA").build())
                         .duree(5)
                         .build()
-        );*/
+        );
 
-        /*Participant participant = participantRepository.saveAndFlush(Participant.builder()
+        Participant participant = participantRepository.saveAndFlush(Participant.builder()
                 .nom("Ayoub").prenom("Zoubeidi").tel("58671198").email("ayoub@Zoubeidi.fr").build());
 
         var participant2 = participantRepository.saveAndFlush(Participant.builder()
                 .nom("Mohssen").prenom("Double FEUILLE").tel("21111128").email("mohssen@pates.fr").build());*/
 
+/*
 
-  /*      var participant = participantRepository.findAll().get(0);
+        var participant = participantRepository.findAll().get(0);
 
         sessionRepository.findAll().forEach(session -> {
             participant.getSessions().add(session);
