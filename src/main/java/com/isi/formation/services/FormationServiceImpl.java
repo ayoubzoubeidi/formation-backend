@@ -5,8 +5,10 @@ import com.isi.formation.mappers.FormationMapper;
 import com.isi.formation.mappers.SessionMapper;
 import com.isi.formation.repository.FormationRepository;
 import com.isi.formation.web.models.FormationDto;
+import com.isi.formation.web.models.FormationMainList;
 import com.isi.formation.web.models.SessionDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -45,11 +47,9 @@ public class FormationServiceImpl implements FormationService {
     }
 
     @Override
-    public List<FormationDto> getAllFormation() {
-        return formationRepository.findAll()
-                .stream()
-                .map(formationMapper::formationToFormationDto)
-                .collect(Collectors.toList());
+    @Cacheable("formations")
+    public List<FormationMainList> getAllFormation() {
+        return formationRepository.findAllFormationList();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.isi.formation.services;
 
+import com.isi.formation.domain.Formateur;
 import com.isi.formation.web.models.FormateurDto;
 
 import java.net.URI;
@@ -17,5 +18,6 @@ public interface FormateurService {
     FormateurDto getFormateurById(UUID FormateurId);
 
     void deleteFormateurById(UUID FormateurId);
+
 
 }

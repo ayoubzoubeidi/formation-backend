@@ -1,8 +1,14 @@
 package com.isi.formation.services;
 
+import com.isi.formation.domain.Formateur;
+import com.isi.formation.domain.Formation;
+import com.isi.formation.domain.Participant;
 import com.isi.formation.domain.Session;
 import com.isi.formation.mappers.ParticipantMapper;
 import com.isi.formation.mappers.SessionMapper;
+import com.isi.formation.repository.FormateurRepository;
+import com.isi.formation.repository.FormationRepository;
+import com.isi.formation.repository.ParticipantRepository;
 import com.isi.formation.repository.SessionRepository;
 import com.isi.formation.web.models.ParticipantDto;
 import com.isi.formation.web.models.SessionDto;
@@ -22,12 +28,31 @@ import java.util.stream.Collectors;
 public class SessionServiceImpl implements SessionService {
 
     private final SessionRepository sessionRepository;
+    private final FormationRepository formationRepository;
+    private final ParticipantRepository participantRepository;
+    private final FormateurRepository formateurRepository;
     private final SessionMapper sessionMapper;
     private final ParticipantMapper participantMapper;
 
     @Override
     public URI saveSession(SessionDto sessionDto) {
-        Session session = sessionRepository.save(sessionMapper.sessionDtoToSession(sessionDto));
+
+        Session session = sessionMapper.sessionDtoToSessionWithoutParticipant(sessionDto);
+
+        Formation formation = formationRepository.getFormationByTitreLikeIgnoreCase(sessionDto.getFormation());
+        Formateur formateur = formateurRepository.getById(sessionDto.getFormateur().getId());
+
+        session.setFormation(formation);
+        session.setFormateur(formateur);
+
+        for (ParticipantDto participant : sessionDto.getParticipants()) {
+
+            var managedParticipant = participantRepository.getById(participant.getId());
+            session.addParticipant(managedParticipant);
+
+        }
+
+        session = sessionRepository.save(session);
 
         return ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}").buildAndExpand(session.getId()).toUri();

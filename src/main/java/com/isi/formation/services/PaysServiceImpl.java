@@ -5,6 +5,7 @@ import com.isi.formation.mappers.PaysMapper;
 import com.isi.formation.repository.PaysRepository;
 import com.isi.formation.web.models.PaysDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -39,6 +40,7 @@ public class PaysServiceImpl implements PaysService {
     }
 
     @Override
+    @Cacheable("pays")
     public List<PaysDto> getAllPays() {
         return paysRepository.findAll()
                 .stream()

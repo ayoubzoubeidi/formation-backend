@@ -11,7 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
+@ToString
 @NamedEntityGraph(name = "Participants.all",
         attributeNodes = {@NamedAttributeNode("organisme"),
                 @NamedAttributeNode(value = "sessions", subgraph = "sessions-sub")}, subgraphs = {
@@ -46,5 +46,6 @@ public class Participant extends BaseEntity{
     private String email;
 
     private String tel;
+
 
 }

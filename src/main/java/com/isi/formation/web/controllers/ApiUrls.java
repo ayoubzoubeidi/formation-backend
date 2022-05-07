@@ -33,4 +33,7 @@ public class ApiUrls {
     // Utilisateur
     public final static String UTILISATEUR_MAIN_URL = "/utilisateurs";
     public final static String UTILISATEUR_BY_ID = UTILISATEUR_MAIN_URL + "/{id}";
+
+    // Statistics
+    public final static String STATISTICS_MAIN_URL = "/statistics";
 }

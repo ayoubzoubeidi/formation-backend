@@ -1,8 +1,8 @@
 package com.isi.formation.services;
 
 import com.isi.formation.web.models.FormationDto;
+import com.isi.formation.web.models.FormationMainList;
 import com.isi.formation.web.models.SessionDto;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.net.URI;
 import java.util.List;
@@ -14,7 +14,7 @@ public interface FormationService {
 
     void updateFormation(FormationDto formationDto, UUID id);
 
-    List<FormationDto> getAllFormation();
+    List<FormationMainList> getAllFormation();
 
     List<SessionDto> getAllSessionsByFormation(UUID formationId);
 

@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
-
+@ToString
 @NamedEntityGraph(name = "Sessions.all",
         attributeNodes = {@NamedAttributeNode("organisme"), @NamedAttributeNode("formation"),
                 @NamedAttributeNode("formateur"), @NamedAttributeNode("participants")}
@@ -28,7 +28,7 @@ public class Session extends BaseEntity {
 
     private Date dateFin;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "formateur_id")
     private Formateur formateur;
 
@@ -36,10 +36,19 @@ public class Session extends BaseEntity {
     @JoinColumn(name = "formation_id")
     private Formation formation;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
     @JoinTable(name = "participation",
             joinColumns = {@JoinColumn(name = "session_id")},
             inverseJoinColumns = {@JoinColumn(name = "participant_id")})
     private Set<Participant> participants = new HashSet<>();
 
+    public void addParticipant(Participant participant) {
+
+        if (this.getParticipants() == null) {
+            this.setParticipants(new HashSet<>());
+        }
+
+        participant.getSessions().add(this);
+        this.getParticipants().add(participant);
+    }
 }

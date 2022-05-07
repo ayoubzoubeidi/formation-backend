@@ -1,7 +1,9 @@
 package com.isi.formation.repository;
 
+import com.isi.formation.domain.Formateur;
 import com.isi.formation.domain.Participant;
 import com.isi.formation.domain.Session;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -37,5 +39,6 @@ public interface SessionRepository extends JpaRepository<Session, UUID> {
             nativeQuery = true)
     @Modifying
     void removeParticipation(@Param("sessionId") UUID sessionId, @Param("participantId") UUID participantId);
+
 
 }
