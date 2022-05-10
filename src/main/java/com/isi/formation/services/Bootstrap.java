@@ -27,13 +27,12 @@ public class Bootstrap implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-
-       /* userRepository.saveAndFlush(
-                ApplicationUser.builder().username("ayoub").password(passwordEncoder.encode("ayoub")).role(Role.builder()
+        userRepository.saveAndFlush(
+                ApplicationUser.builder().username("mohssen").password(passwordEncoder.encode("lalala")).role(Role.builder()
                         .authority(Authority.builder().permission("read.all").build()).build()).build()
         );
 
-
+/*
         var formateur1 = Formateur.builder().nom("Mohssen").prenom("Double Feuille").tel("58671198").build();
 
         var session1 = sessionRepository.save(Session.builder().dateDebut(new Date()).dateFin(new Date(2023, Calendar.FEBRUARY, 15))

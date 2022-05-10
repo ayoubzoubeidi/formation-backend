@@ -19,7 +19,7 @@ public class Formation extends BaseEntity {
 
     private String typeFormation;
 
-    @OneToMany(mappedBy = "formation", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+    @OneToMany(mappedBy = "formation", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH}, orphanRemoval = true)
     @Singular
     private Set<Session> sessions = new HashSet<>();
 
