@@ -5,7 +5,6 @@ import com.isi.formation.repository.ParticipantRepository;
 import com.isi.formation.repository.SessionRepository;
 import com.isi.formation.web.models.DashboardStatistics;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -17,7 +16,6 @@ public class StatisticsServiceImpl implements StatisticsService {
     private final ParticipantRepository participantRepository;
 
     @Override
-    @Cacheable("statistics")
     public DashboardStatistics getDashboardStatistics() {
         var statistics = new DashboardStatistics();
 

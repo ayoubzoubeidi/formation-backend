@@ -6,7 +6,7 @@ import com.isi.formation.mappers.SessionMapper;
 import com.isi.formation.repository.FormationRepository;
 import com.isi.formation.web.models.FormationDto;
 import com.isi.formation.web.models.FormationMainList;
-import com.isi.formation.web.models.SessionDto;
+import com.isi.formation.web.models.SessionListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,11 +52,8 @@ public class FormationServiceImpl implements FormationService {
     }
 
     @Override
-    public List<SessionDto> getAllSessionsByFormation(UUID formationId) {
-        return formationRepository.findAllSessionsByFormationId(formationId)
-                .stream()
-                .map(sessionMapper::sessionToSessionDto)
-                .collect(Collectors.toList());
+    public List<SessionListDto> getAllSessionsByFormation(UUID formationId) {
+        return formationRepository.findAllSessionsByFormationId(formationId);
     }
 
     @Override

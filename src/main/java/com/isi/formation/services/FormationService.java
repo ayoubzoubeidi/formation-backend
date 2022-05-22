@@ -2,7 +2,7 @@ package com.isi.formation.services;
 
 import com.isi.formation.web.models.FormationDto;
 import com.isi.formation.web.models.FormationMainList;
-import com.isi.formation.web.models.SessionDto;
+import com.isi.formation.web.models.SessionListDto;
 
 import java.net.URI;
 import java.util.List;
@@ -16,7 +16,7 @@ public interface FormationService {
 
     List<FormationMainList> getAllFormation();
 
-    List<SessionDto> getAllSessionsByFormation(UUID formationId);
+    List<SessionListDto> getAllSessionsByFormation(UUID formationId);
 
     FormationDto getFormationById(UUID formationId);
 

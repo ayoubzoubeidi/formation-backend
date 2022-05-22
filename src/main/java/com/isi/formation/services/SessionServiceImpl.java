@@ -2,7 +2,6 @@ package com.isi.formation.services;
 
 import com.isi.formation.domain.Formateur;
 import com.isi.formation.domain.Formation;
-import com.isi.formation.domain.Participant;
 import com.isi.formation.domain.Session;
 import com.isi.formation.mappers.ParticipantMapper;
 import com.isi.formation.mappers.SessionMapper;
@@ -12,6 +11,7 @@ import com.isi.formation.repository.ParticipantRepository;
 import com.isi.formation.repository.SessionRepository;
 import com.isi.formation.web.models.ParticipantDto;
 import com.isi.formation.web.models.SessionDto;
+import com.isi.formation.web.models.SessionListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,11 +70,8 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public List<SessionDto> getAllSession() {
-        return sessionRepository.findAll()
-                .stream()
-                .map(sessionMapper::sessionToSessionDto)
-                .collect(Collectors.toList());
+    public List<SessionListDto> getAllSession() {
+        return sessionRepository.findSessionList();
     }
 
     @Override

@@ -41,8 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.cors();
         http.authorizeRequests(authorize ->
                 authorize
-                        .antMatchers("/", "/login*",
-                                "/refresh").permitAll());
+                        .antMatchers("/", "/login*", "/refresh", "/sign-up").permitAll());
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilter(new AuthenticationFilter(authenticationManagerBean(), jwtService));

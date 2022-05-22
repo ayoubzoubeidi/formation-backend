@@ -28,7 +28,7 @@ public class Session extends BaseEntity {
 
     private Date dateFin;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST})
     @JoinColumn(name = "formateur_id")
     private Formateur formateur;
 

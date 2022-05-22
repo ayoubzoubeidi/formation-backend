@@ -2,17 +2,14 @@ package com.isi.formation.web.models;
 
 import lombok.*;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PaysDto {
+public class SignupRequestBody {
 
-    private UUID id;
-
-    private String nom;
+    private String username;
+    private String password;
 
 }

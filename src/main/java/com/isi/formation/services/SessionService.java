@@ -2,6 +2,7 @@ package com.isi.formation.services;
 
 import com.isi.formation.web.models.ParticipantDto;
 import com.isi.formation.web.models.SessionDto;
+import com.isi.formation.web.models.SessionListDto;
 
 import java.net.URI;
 import java.util.List;
@@ -13,7 +14,7 @@ public interface SessionService {
 
     void updateSession(SessionDto SessionDto, UUID id);
 
-    List<SessionDto> getAllSession();
+    List<SessionListDto> getAllSession();
 
     List<ParticipantDto> getParticipationBySessionId(UUID sessionId);
 

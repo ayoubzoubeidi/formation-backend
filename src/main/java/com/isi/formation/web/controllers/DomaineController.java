@@ -9,7 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.UUID;
 
 import static com.isi.formation.web.controllers.ApiUrls.DOMAINE_MAIN_URL;

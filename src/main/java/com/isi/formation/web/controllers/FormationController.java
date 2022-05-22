@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-import static com.isi.formation.web.controllers.ApiUrls.*;
+import static com.isi.formation.web.controllers.ApiUrls.FORMATION_MAIN_URL;
 
 @Controller
 @RequestMapping(FORMATION_MAIN_URL)
