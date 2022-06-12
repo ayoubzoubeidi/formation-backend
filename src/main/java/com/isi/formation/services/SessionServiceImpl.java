@@ -1,5 +1,6 @@
 package com.isi.formation.services;
 
+import com.isi.formation.dao.SessionDao;
 import com.isi.formation.domain.Formateur;
 import com.isi.formation.domain.Formation;
 import com.isi.formation.domain.Session;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -33,13 +35,14 @@ public class SessionServiceImpl implements SessionService {
     private final FormateurRepository formateurRepository;
     private final SessionMapper sessionMapper;
     private final ParticipantMapper participantMapper;
+    private final SessionDao sessionDao;
 
     @Override
     public URI saveSession(SessionDto sessionDto) {
 
-        Session session = sessionMapper.sessionDtoToSessionWithoutParticipant(sessionDto);
-
-        Formation formation = formationRepository.getFormationByTitreLikeIgnoreCase(sessionDto.getFormation());
+        Session session = sessionMapper.sessionDtoToSession(sessionDto);
+        session.setFormation(Formation.builder().titre(sessionDto.getFormation()).build());
+        /*Formation formation = formationRepository.getFormationByTitreLikeIgnoreCase(sessionDto.getFormation());
         Formateur formateur = formateurRepository.getById(sessionDto.getFormateur().getId());
 
         session.setFormation(formation);
@@ -52,7 +55,9 @@ public class SessionServiceImpl implements SessionService {
 
         }
 
-        session = sessionRepository.save(session);
+        session = sessionRepository.save(session);*/
+
+        session = sessionDao.createSession(session);
 
         return ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}").buildAndExpand(session.getId()).toUri();
@@ -61,6 +66,12 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public void updateSession(SessionDto sessionDto, UUID id) {
         Session savedSession = sessionRepository.findById(id).orElseThrow(RuntimeException::new);
+
+        var today = new Date();
+
+        if (sessionDto.getDateDebut().before(today) || sessionDto.getDateFin().before(today)) {
+            throw new RuntimeException("Sessions Date Error");
+        }
 
         savedSession.setDateDebut(sessionDto.getDateDebut());
         savedSession.setDateFin(sessionDto.getDateFin());

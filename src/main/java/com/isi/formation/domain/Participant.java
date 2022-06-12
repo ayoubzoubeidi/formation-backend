@@ -10,7 +10,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @ToString
 @NamedEntityGraph(name = "Participants.all",
         attributeNodes = {@NamedAttributeNode("organisme"),
